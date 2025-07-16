@@ -13,6 +13,38 @@
 - **Desain Responsif:** Tampilan yang menyesuaikan berbagai perangkat.
 - **Notifikasi Interaktif:** Umpan balik aksi pengguna melalui notifikasi.
 
+## ⚙️ Setup Database
+
+Sebelum menjalankan backend, siapkan database MySQL Anda terlebih dahulu.
+
+### 1. Buat Database
+
+Buka tools database Anda (phpMyAdmin, DBeaver, dll) dan jalankan perintah SQL berikut:
+
+```sql
+CREATE DATABASE horus_salman_db
+CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+### 2. Buat Tabel Pengguna (users)
+
+Setelah membuat database, pilih database tersebut dan jalankan perintah SQL ini untuk membuat tabel yang dibutuhkan:
+
+```sql
+CREATE TABLE `users` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `username` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `users_email_unique` (`email`),
+    UNIQUE KEY `users_username_unique` (`username`)
+);
+```
+
 ## ⚙️ Cara Menjalankan Proyek
 
 Untuk menjalankan proyek ini secara penuh, Anda perlu menjalankan **backend** dan **frontend** secara bersamaan di dua terminal terpisah.
@@ -50,7 +82,7 @@ Untuk menjalankan proyek ini secara penuh, Anda perlu menjalankan **backend** da
 5.  **Jalankan server backend**:
 
     ```bash
-    python run.py
+    python run.py atau venv/Scripts/python run.py
     ```
 
     > API akan berjalan di `http://127.0.0.1:5000`.
@@ -69,11 +101,20 @@ Untuk menjalankan proyek ini secara penuh, Anda perlu menjalankan **backend** da
     npm install
     ```
 
-3.  **Jalankan development server**:
+3.  **Konfigurasi Environment**:
+
+    - Salin file `.env.example` menjadi `.env`.
+    - Sesuaikan variabel berikut pada file `.env`:
+      ```
+      VITE_API_BASE_URL=http://127.0.0.1:5000
+      ```
+    - Pastikan URL di atas sesuai dengan alamat api backend Flask Anda.
+
+4.  **Jalankan development server**:
 
     ```bash
     npm run dev
     ```
 
-4.  **Akses aplikasi di browser**:
+5.  **Akses aplikasi di browser**:
     Buka browser Anda dan navigasi ke `http://localhost:5173` (atau port lain yang ditampilkan di terminal Anda).
