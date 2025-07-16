@@ -89,7 +89,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-[#EFF3FA] p-4 sm:p-6">
+  <div class="flex min-h-screen flex-col bg-[#EFF3FA] p-4 sm:p-6 lg:p-12">
     <div class="container mx-auto max-w-7xl">
       <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
@@ -114,7 +114,7 @@ onMounted(() => {
             type="text"
             v-model="searchQuery"
             placeholder="Cari berdasarkan nama, username, atau email..."
-            class="block w-full rounded-full border border-[#E5E5E5] bg-white py-3 pl-12 pr-4 transition-all duration-300 focus:ring-2 focus:ring-[#FFC736] sm:text-sm"
+            class="block w-full rounded-full border border-[#E5E5E5] bg-white py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#FFC736] sm:text-sm"
           />
         </div>
         <div class="overflow-x-auto">
@@ -178,12 +178,13 @@ onMounted(() => {
                   class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6"
                 >
                   <div class="flex items-center gap-4">
-                    <button
+                    <router-link
+                      :to="{ name: 'update-user', params: { id: user.id } }"
                       class="text-[#0D5CD7] transition-colors hover:text-blue-800"
                       title="Update"
                     >
                       <i class="bx bxs-edit text-xl"></i>
-                    </button>
+                    </router-link>
                     <button
                       @click="handleDelete(user.id)"
                       class="text-red-600 transition-colors hover:text-red-900"

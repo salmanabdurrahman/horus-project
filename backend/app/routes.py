@@ -20,6 +20,15 @@ def get_users():
     users_data = [user.to_dict() for user in users]
     return api_response(200, "Data semua user berhasil diambil.", users_data)
 
+# [GET] /api/users/<id>
+@bp.route('/users/<int:id>', methods=['GET'])
+def get_user(id):
+    user = User.query.get(id)
+    if not user:
+        return api_response(404, f"User dengan ID {id} tidak ditemukan.")
+    
+    return api_response(200, f"Data user dengan ID {id} berhasil diambil.", user.to_dict())
+
 # [POST] /api/users
 @bp.route('/users', methods=['POST'])
 def create_user():

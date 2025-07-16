@@ -20,6 +20,12 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/update/:id',
+      name: 'update-user',
+      component: () => import('../views/UpdateUserView.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 });
 
