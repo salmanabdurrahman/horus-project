@@ -1,0 +1,13 @@
+venv/
+.env*
+!.env.example
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.idea/
+*.swp
+instance/
+*.sqlite
+*.sqlite3
