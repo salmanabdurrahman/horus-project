@@ -22,6 +22,7 @@ async function handleLogin() {
     });
 
     toast.success(response?.data?.message || 'Anda berhasil masuk!');
+    localStorage.setItem('user', JSON.stringify(response?.data?.data));
     router.push({ name: 'dashboard' });
   } catch (error) {
     console.error('Login error:', error);
