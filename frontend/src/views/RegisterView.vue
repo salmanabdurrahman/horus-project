@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import apiClient from '@/services/api';
 
 const form = ref({
   name: '',
@@ -18,7 +18,7 @@ async function handleRegister() {
   isLoading.value = true;
 
   try {
-    const response = await axios.post('http://127.0.0.1:5000/api/users', form.value);
+    const response = await apiClient.post('/users', form.value);
 
     toast.success(response?.data?.message || 'Pendaftaran berhasil! Silakan masuk.');
     router.push('/');

@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import apiClient from '@/services/api';
 
 const form = ref({
   email: '',
@@ -16,7 +16,7 @@ async function handleLogin() {
   isLoading.value = true;
 
   try {
-    const response = await axios.post('http://127.0.0.1:5000/api/login', {
+    const response = await apiClient.post('/login', {
       email: form.value.email,
       password: form.value.password,
     });

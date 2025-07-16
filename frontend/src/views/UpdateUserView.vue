@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import apiClient from '@/services/api';
 
 const form = ref({
   name: '',
@@ -21,7 +21,7 @@ async function fetchUserData() {
   isLoading.value = true;
 
   try {
-    const response = await axios.get(`http://127.0.0.1:5000/api/users/${userId}`);
+    const response = await apiClient.get(`/users/${userId}`);
     const userData = response?.data?.data;
 
     form.value.name = userData.name;
@@ -39,7 +39,7 @@ async function handleUpdate() {
   isLoading.value = true;
 
   try {
-    const response = await axios.put(`http://127.0.0.1:5000/api/users/${userId}`, form.value);
+    const response = await apiClient.put(`/users/${userId}`, form.value);
     toast.success(response?.data?.message || 'Data pengguna berhasil diperbarui!');
     router.push({ name: 'dashboard' });
   } catch (error) {

@@ -1,9 +1,9 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import { getLoggedInUser, logout } from '@/services/auth';
+import apiClient from '@/services/api';
 
 const users = ref([]);
 const isLoading = ref(true);
@@ -44,7 +44,7 @@ async function fetchUsers() {
   isLoading.value = true;
 
   try {
-    const response = await axios.get('http://127.0.0.1:5000/api/users');
+    const response = await apiClient.get('/users');
     users.value = response?.data?.data || [];
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -66,7 +66,7 @@ function sortBy(key) {
 async function handleDelete(userId) {
   if (confirm('Apakah Anda yakin ingin menghapus pengguna ini?')) {
     try {
-      const response = await axios.delete(`http://127.0.0.1:5000/api/users/${userId}`);
+      const response = await apiClient.delete(`/users/${userId}`);
       toast.success(response?.data?.message || 'Pengguna berhasil dihapus!');
       await fetchUsers();
     } catch (error) {

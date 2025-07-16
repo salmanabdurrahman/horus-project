@@ -1,7 +1,9 @@
+import os
 from app import create_app, db
 from app.models import User
 
-app = create_app()
+config_name =  os.getenv('FLASK_CONFIG', 'development')
+app = create_app(config_name)
 
 @app.shell_context_processor
 def make_shell_context():
