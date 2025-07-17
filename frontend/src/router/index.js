@@ -8,11 +8,13 @@ const router = createRouter({
       path: '/',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
+      meta: { guestOnly: true },
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue'),
+      meta: { guestOnly: true },
     },
     {
       path: '/dashboard',
@@ -26,21 +28,26 @@ const router = createRouter({
       component: () => import('../views/UpdateUserView.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   const isLoggedIn = !!getLoggedInUser();
 
-  if (to.meta.requiresAuth) {
-    if (isLoggedIn) {
-      next();
-    } else {
-      next({ name: 'login' });
-    }
-  } else {
-    next();
+  if (to.meta.guestOnly && isLoggedIn) {
+    next({ name: 'dashboard' });
   }
+
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    next({ name: 'login' });
+  }
+
+  next();
 });
 
 export default router;
