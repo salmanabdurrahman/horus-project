@@ -5,7 +5,7 @@ import { useToast } from 'vue-toastification';
 import apiClient from '@/services/api';
 
 const form = ref({
-  email: '',
+  username: '',
   password: '',
 });
 const isLoading = ref(false);
@@ -17,7 +17,7 @@ async function handleLogin() {
 
   try {
     const response = await apiClient.post('/login', {
-      email: form.value.email,
+      username: form.value.username,
       password: form.value.password,
     });
 
@@ -49,19 +49,19 @@ async function handleLogin() {
         </div>
         <h1 class="text-2xl font-bold leading-[34px]">Login</h1>
         <div class="flex flex-col gap-2">
-          <label for="email" class="font-medium">Alamat Email</label>
+          <label for="username" class="font-medium">Username</label>
           <div
             class="flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC736]"
           >
             <div class="flex shrink-0">
-              <i class="bx bxs-envelope text-2xl text-gray-500"></i>
+              <i class="bx bxs-user-circle text-2xl text-gray-500"></i>
             </div>
             <input
-              type="email"
-              id="email"
-              v-model="form.email"
+              type="text"
+              id="username"
+              v-model="form.username"
               class="w-full appearance-none bg-transparent font-semibold text-black outline-none placeholder:font-normal placeholder:text-[#616369]"
-              placeholder="Masukan alamat email kamu"
+              placeholder="Masukan username kamu"
               autofocus
               required
             />

@@ -87,12 +87,12 @@ def delete_user(id):
 @bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    if not data or not data.get('email') or not data.get('password'):
-        return api_response(400, "Email dan password diperlukan.")
-        
-    user = User.query.filter_by(email=data.get('email')).first()
+    if not data or not data.get('username') or not data.get('password'):
+        return api_response(400, "Username dan password diperlukan.")
+
+    user = User.query.filter_by(username=data.get('username')).first()
 
     if user is None or not user.check_password(data.get('password')):
-        return api_response(401, "Email atau password salah.")
+        return api_response(401, "Username atau password salah.")
 
     return api_response(200, "Login berhasil.", user.to_dict())
