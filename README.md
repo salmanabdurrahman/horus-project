@@ -106,7 +106,7 @@ Untuk menjalankan proyek ini secara penuh, Anda perlu menjalankan **backend** da
     - Salin file `.env.example` menjadi `.env`.
     - Sesuaikan variabel berikut pada file `.env`:
       ```
-      VITE_API_BASE_URL=http://127.0.0.1:5000
+      VITE_API_BASE_URL=http://127.0.0.1:5000/api
       ```
     - Pastikan URL di atas sesuai dengan alamat api backend Flask Anda.
 
